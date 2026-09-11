@@ -1,0 +1,433 @@
+/* ==========================================================================
+   Variables y Reset
+   ========================================================================== */
+:root {
+    --primary-color: #ef4444;
+    --primary-hover: #dc2626;
+    --secondary-color: #e5e7eb;
+    --secondary-hover: #d1d5db;
+    --danger-color: #ef4444;
+    --danger-hover: #b91c1c;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --bg-main: #f3f4f6;
+    --bg-card: #ffffff;
+    --border-color: #e5e7eb;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --border-radius: 8px;
+    --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.header h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.header p {
+    color: var(--text-muted);
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.align-start {
+    align-items: start;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-danger {
+    color: var(--danger-color);
+}
+
+/* ==========================================================================
+   Tarjetas (Cards)
+   ========================================================================== */
+.card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--bg-main);
+    padding-bottom: 0.5rem;
+}
+
+.business-card {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+}
+
+.business-info p {
+    font-size: 1.1rem;
+    color: #4b5563;
+    margin-bottom: 0.3rem;
+}
+
+/* ==========================================================================
+   Formularios e Inputs
+   ========================================================================== */
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text-muted);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+input:disabled {
+    background-color: var(--bg-main);
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Botones
+   ========================================================================== */
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-family);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 0.4rem 0.8rem;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover);
+}
+
+.btn-print {
+    background-color: #10b981;
+    color: white;
+    font-size: 1.1rem;
+    padding: 1rem;
+    width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    transition: opacity 0.2s;
+}
+
+.btn-print:hover {
+    opacity: 0.9;
+}
+
+/* ==========================================================================
+   Tabla de Productos
+   ========================================================================== */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+th,
+td {
+    padding: 0.75rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--bg-main);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.cell-subtotal {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    background-color: var(--bg-main);
+    border-radius: var(--border-radius);
+    margin-top: 1rem;
+}
+
+table input[type="text"],
+table input[type="number"],
+table select {
+    padding: 0.4rem;
+    font-size: 0.9rem;
+}
+
+table input.precio-input {
+    text-align: right;
+}
+
+/* ==========================================================================
+   Tarjeta de Resumen
+   ========================================================================== */
+.summary-card {
+    background-color: #f8fafc;
+    border: 2px solid var(--primary-color);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.summary-divider {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 1rem 0;
+}
+
+.total-row {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   Estilos de Impresión (PDF)
+   ========================================================================== */
+@media print {
+    @page {
+        size: A4;
+        margin: 15mm;
+    }
+
+    body {
+        background-color: white;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .container {
+        max-width: 100%;
+        gap: 1rem;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .card {
+        box-shadow: none;
+        padding: 0;
+        border: none;
+        margin-bottom: 1rem;
+    }
+
+    .card-title {
+        font-size: 16px;
+        color: #000;
+        border-bottom: 2px solid #ef4444;
+        margin-bottom: 0.5rem;
+        padding-bottom: 5px;
+    }
+
+    .business-card {
+        background-color: transparent;
+        border: none;
+    }
+
+    .business-info h3 {
+        color: #ef4444 !important;
+    }
+
+    .print-only {
+        display: block !important;
+    }
+
+    input,
+    select,
+    textarea {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    ::placeholder {
+        color: transparent;
+    }
+
+    .grid-2 {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    .grid-2>* {
+        flex: 1;
+    }
+
+    .table-responsive {
+        overflow: visible;
+    }
+
+    table {
+        min-width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #e5e7eb;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        border: 1px solid #e5e7eb;
+    }
+
+    th {
+        background-color: #fef2f2 !important;
+        color: #b91c1c !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .summary-card {
+        border: none;
+        margin-top: 1rem;
+        width: 300px;
+        margin-left: auto;
+    }
+
+    .total-row {
+        color: #ef4444 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Estas dos líneas controlan la impresión "Sin Total" */
+    body.print-sin-total .hide-on-print-no-total,
+    body.print-sin-total .col-tipo,
+    body.print-sin-total .col-subtotal {
+        display: none !important;
+    }
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador Fred Motos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Encabezado -->
+        <header class="header no-print">
+            <h1>Cotizador Automático</h1>
+            <p>Genera cotizaciones en formato PDF de manera rápida</p>
+        </header>
+
+        <!-- Información del Documento -->
+        <div class="grid-2">
+            <!-- Datos del Negocio (Fijos) -->
+            <section class="card business-card">
+                <h2 class="card-title no-print">Datos del Negocio</h2>
+                <div class="business-info">
+                    <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 0.5rem;">Fred Motos</h3>
+                    <p><strong>Dirección:</strong> calle 22 sur #29a-59</p>
+                    <p><strong>Teléfono:</strong> 317 854 5422</p>
+                </div>
+            </section>
+
+            <!-- Datos del Cliente (Simplificado) -->
+            <section class="card">
+                <h2 class="card-title no-print">Datos del Cliente</h2>
+                <div class="form-group">
+                    <label>Nombre del cliente</label>
+                    <input type="text" id="cliente-nombre" placeholder="Nombre completo">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="text" id="cliente-telefono" placeholder="Número de celular">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" id="cliente-fecha">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Área para Motocicleta y Productos -->
+        <section class="card no-print">
+            <h2 class="card-title">Información de los Repuestos</h2>
+
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label>¿Para qué motocicleta son los repuestos?</label>
+                <input type="text" id="moto-modelo" placeholder="Ej. Yamaha YZF-R15 V3 gris rojo"
+                    style="font-weight: bold; color: var(--primary-color);">
+            </div>
+
+            <div class="form-group">
+                <label>Pegar lista de productos</label>
+                <textarea id="texto-productos" rows="4"
+                    placeholder="Pega aquí los repuestos separados por coma o saltos de línea..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button id="btn-procesar" class="btn btn-primary">Procesar repuestos</button>
+                <button id="btn-limpiar-texto" class="btn btn-secondary">Limpiar área</button>
+            </div>
+        </section>
+
+        <!-- Tabla de Cotización -->
+        <section class="card">
+            <div class="table-header">
+                <h2 class="card-title">Detalle de Cotización</h2>
+                <button id="btn-agregar" class="btn btn-secondary no-print">+ Agregar repuesto manual</button>
+            </div>
+
+            <div class="table-responsive">
+                <table id="tabla-cotizacion">
+                    <thead>
+                        <tr>
+                            <th width="5%">#</th>
+                            <th width="23%">Repuesto</th>
+                            <th width="7%">Cant.</th>
+                            <th width="14%">Precio Original</th>
+                            <th width="14%">Precio Genérico</th>
+                            <!-- Nuevas clases para ocultar al imprimir -->
+                            <th width="12%" class="col-tipo">Tipo</th>
+                            <th width="15%" class="col-subtotal">Subtotal</th>
+                            <th width="5%" class="no-print text-center">Desc.</th>
+                            <th width="5%" class="no-print">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla">
+                        <!-- Las filas se generarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="mensaje-vacio" class="empty-state no-print">
+                No hay repuestos en la cotización.
+            </div>
+
+            <!-- Campo de Motocicleta para impresión -->
+            <div id="print-moto-info" class="print-only mt-4" style="display: none;">
+                <p style="font-size: 1.1rem;"><strong>Motocicleta:</strong> <span id="print-moto-text"></span></p>
+            </div>
+        </section>
+
+        <!-- Sección de Descuento y Totales -->
+        <div class="grid-2 align-start" id="seccion-totales">
+            <section class="card hide-on-print-no-total">
+                <div class="descuento-box no-print">
+                    <h3 class="card-title" style="font-size: 1rem;">Aplicar Descuento Global</h3>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <select id="tipo-descuento">
+                                <option value="ninguno">Sin descuento</option>
+                                <option value="porcentaje">Porcentaje (%)</option>
+                                <option value="fijo">Valor Fijo ($)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="valor-descuento" placeholder="0" disabled>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        * El descuento solo se aplicará a los repuestos que tengan marcada la casilla "Desc." en la
+                        tabla.
+                    </p>
+                </div>
+            </section>
+
+            <section class="card summary-card hide-on-print-no-total" id="tarjeta-resumen">
+                <h2 class="card-title text-center">RESUMEN</h2>
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="resumen-subtotal">$0</span>
+                </div>
+                <div class="summary-row" id="fila-descuento" style="display: none;">
+                    <span>Descuento (<span id="label-descuento">%</span>):</span>
+                    <span id="resumen-descuento" class="text-danger">-$0</span>
+                </div>
+                <hr class="summary-divider">
+                <div class="summary-row total-row">
+                    <span>TOTAL:</span>
+                    <span id="resumen-total">$0</span>
+                </div>
+            </section>
+        </div>
+
+        <!-- Botones de Impresión (PDF) -->
+        <div class="print-actions no-print grid-2">
+            <button id="btn-imprimir-completo" class="btn btn-print">🖨 Imprimir Cotización Completa</button>
+            <button id="btn-imprimir-sintotal" class="btn btn-print btn-secondary"
+                style="background-color: #64748b; color: white;">🖨 Imprimir Lista (Sin Total)</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
